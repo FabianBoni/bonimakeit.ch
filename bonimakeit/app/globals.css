@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: #000; /* Schwarzer Hintergrund für den Nachthimmel */
+  overflow: hidden; /* Verhindert Scrollen bei Animation */
+  height: 100vh;
+  margin: 0;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(75, 213, 238, 0.05) 50%,
+    transparent 100%
+  );
+  animation: scan 6s ease-in-out infinite;
+}
+
+/* Container für Sterne */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: -1;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0; /* Standardmäßig unsichtbar */
+  transition: opacity 1s ease-in-out; /* Weicher Übergang beim Ein- und Ausblenden */
+}
+
+@keyframes flicker {
+  0% { opacity: 0.9; }
+  10% { opacity: 0.7; }
+  20% { opacity: 0.85; }
+  30% { opacity: 0.75; }
+  40% { opacity: 0.8; }
+  50% { opacity: 0.7; }
+  60% { opacity: 0.8; }
+  70% { opacity: 0.9; }
+  80% { opacity: 0.7; }
+  90% { opacity: 0.85; }
+  100% { opacity: 0.9; }
+}
+
+.star-wars-hologram-effect {
+  color: #83c3f1;
+  text-shadow: 0 0 5px #83c3f1, 0 0 10px #83c3f1, 0 0 20px #83c3f1, 0 0 40px #83c3f1;
+  animation: flicker 4s infinite alternate;
+}
+
+.star-wars-hologram-effect {
+  color: #4bd5ee;
+  text-shadow: 0 0 10px #4bd5ee;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.star-wars-hologram-effect:hover {
+  color: #fff;
+  text-shadow: 
+    0 0 10px #4bd5ee,
+    0 0 20px #4bd5ee,
+    0 0 30px #4bd5ee,
+    0 0 40px #4bd5ee;
+  transform: scale(1.1);
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.hologram-bubble {
+  background: rgba(75, 213, 238, 0.1);
+  border: 2px solid #4bd5ee;
+  border-radius: 20px;
+  padding: 1rem 2rem;
+  color: #4bd5ee;
+  font-size: 1.5rem;
+  text-shadow: 0 0 10px #4bd5ee;
+  box-shadow: 0 0 20px rgba(75, 213, 238, 0.3);
+  animation: hologramPulse 2s infinite;
+  white-space: nowrap;
+}
+
+@keyframes hologramPulse {
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+}
