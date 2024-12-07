@@ -2,10 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: #000; /* Schwarzer Hintergrund für den Nachthimmel */
-  overflow: hidden; /* Verhindert Scrollen bei Animation */
-  height: 100vh;
+  background: #000; 
+  overflow-x: hidden;
   margin: 0;
 }
 
@@ -93,10 +96,6 @@ body::before {
   }
 }
 
-.hologram-bubble-container {
-  position: relative;
-}
-
 .hologram-bubble-container::before {
   content: '';
   position: absolute;
@@ -106,17 +105,40 @@ body::before {
   z-index: -1;
 }
 
+.hologram-bubble-container {
+  width: min(300px, 80vw);
+  transform: scale(var(--viewport-scale, 1));
+}
+
 .hologram-bubble {
-  background: rgba(75, 213, 238, 0.1);
-  border: 2px solid #4bd5ee;
-  border-radius: 20px;
-  padding: 1rem 2rem;
-  color: #4bd5ee;
-  font-size: 1.5rem;
-  text-shadow: 0 0 10px #4bd5ee;
-  box-shadow: 0 0 20px rgba(75, 213, 238, 0.3);
-  animation: hologramPulse 2s infinite;
-  white-space: nowrap;
-  min-width: 200px;
-  text-align: center;
+  background: rgba(0, 195, 255, 0.1);
+  border: 2px solid rgba(0, 195, 255, 0.2);
+  border-radius: 15px;
+  padding: 15px;
+  color: #00c3ff;
+  text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+  font-size: clamp(14px, 2vw, 18px);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+  .hologram-bubble-container {
+    --viewport-scale: 0.8;
+  }
+}
+
+@media (max-width: 480px) {
+  .hologram-bubble-container {
+    --viewport-scale: 0.6;
+  }
+}
+
+.about-me {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease-in-out;
+}
+
+.about-me:hover {
+  transform: translateY(-2px);
 }

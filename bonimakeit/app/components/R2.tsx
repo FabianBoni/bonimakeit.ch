@@ -84,7 +84,7 @@ const R2 = () => {
   }, [soundFiles])
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center h-screen w-screen">
+    <div className="-mt-[100px] inset-0 flex items-center justify-center h-screen w-screen">
       <Canvas
         camera={{ position: [10, 10, 10], fov: 35 }}
         style={{ background: 'transparent' }}
@@ -108,4 +108,4 @@ const R2 = () => {
   )
 }
 
-export default R2
+export default R2;

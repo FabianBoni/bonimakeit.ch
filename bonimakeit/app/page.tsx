@@ -1,13 +1,15 @@
 "use client"
 
 import { useEffect } from "react";
+import R2 from "./components/R2";
+import C3PO from "./components/c3po";
 
 const Home = () => {
   useEffect(() => {
     const numberOfStars: number = 200;
     const container: HTMLElement | null = document.getElementById('stars');
     const stars: HTMLDivElement[] = [];
-    
+
     if (container) {
       // Create stars
       for (let i = 0; i < numberOfStars; i++) {
@@ -35,9 +37,34 @@ const Home = () => {
       return () => clearInterval(intervalId);
     }
   }, []);
-  
+
   return (
-    <div className="stars" id="stars"></div>
+    <main className="min-h-screen relative">
+      <div className="stars" id="stars"></div>
+      <div className="container flex flex-col justify-start mx-auto relative z-10">
+        <section>
+          <R2 />
+        </section>
+        <section className="about-me flex flex-row bg-black/50 backdrop-blur-sm rounded-lg p-8 text-white max-w-2xl mx-auto">
+          <C3PO />
+          <div>
+            <h1 className="text-4xl font-bold mb-6">About Me</h1>
+            <div className="space-y-4">
+              <p>
+                Hi, I'm [Your Name]! I'm a passionate developer based in [Location].
+              </p>
+              <p>
+                With expertise in [Your Skills], I love creating innovative solutions
+                and bringing ideas to life through code.
+              </p>
+              <p>
+                When I'm not coding, you can find me [Your Hobbies/Interests].
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
   );
 }
 

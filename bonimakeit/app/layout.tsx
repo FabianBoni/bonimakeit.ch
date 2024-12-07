@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./components/Header";
-import R2 from "./components/R2";
 
 export const metadata: Metadata = {
   title: "Fabian Boni",
@@ -18,7 +17,6 @@ export default function RootLayout({
       <body>
         <Header />
         {children}
-        <R2 />
       </body>
     </html>
   );
