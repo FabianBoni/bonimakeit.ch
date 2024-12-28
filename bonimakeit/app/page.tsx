@@ -33,39 +33,38 @@ const Home = () => {
       };
 
       const intervalId: NodeJS.Timeout = setInterval(animateStars, 100);
+        return () => clearInterval(intervalId);
+      }
+    }, []);
 
-      return () => clearInterval(intervalId);
-    }
-  }, []);
-
-  return (
-    <main className="min-h-screen relative">
-      <div className="stars" id="stars"></div>
-      <div className="container flex flex-col justify-start mx-auto relative z-10">
-        <section>
-          <R2 />
-        </section>
-        <section className="about-me flex flex-row bg-black/50 backdrop-blur-sm rounded-lg p-8 text-white max-w-2xl mx-auto">
-          <C3PO />
-          <div>
-            <h1 className="text-4xl font-bold mb-6">About Me</h1>
-            <div className="space-y-4">
-              <p>
-                Hi, I'm [Your Name]! I'm a passionate developer based in [Location].
-              </p>
-              <p>
-                With expertise in [Your Skills], I love creating innovative solutions
-                and bringing ideas to life through code.
-              </p>
-              <p>
-                When I'm not coding, you can find me [Your Hobbies/Interests].
-              </p>
-            </div>
-          </div>
-        </section>
-      </div>
-    </main>
-  );
-}
+    return (
+      <main className="relative min-h-screen">
+        <div className="stars" id="stars"></div>
+        <div className="w-full relative z-10 min-h-screen">
+          <section className="w-full min-h-screen mx-auto flex items-center justify-center">
+              <R2 />
+          </section>
+          <section className="w-full h-screen flex items-center flex-row justify-between bg-[url('/images/tatooinebig.jpg')] bg-cover bg-center bg-no-repeat">
+      <C3PO />
+      <div className="w-1/3">
+        <h1 className="text-4xl font-bold mb-6">About Me</h1>
+        <div className="space-y-4">
+          <p>
+            Hi, I'm [Your Name]! I'm a passionate developer based in [Location].
+          </p>
+          <p>
+            With expertise in [Your Skills], I love creating innovative solutions
+            and bringing ideas to life through code.
+          </p>
+          <p>
+            When I'm not coding, you can find me [Your Hobbies/Interests].
+          </p>
+        </div>
+        </div>
+</section>
+        </div>
+      </main>
+    );
+  }
 
 export default Home;

@@ -1,7 +1,7 @@
 'use client'
 
 import { Canvas } from '@react-three/fiber'
-import { useGLTF, OrbitControls, Environment, Html, useAnimations } from '@react-three/drei'
+import { useGLTF, OrbitControls, Environment, useAnimations } from '@react-three/drei'
 import { Howl } from 'howler'
 import { useEffect, useState } from 'react'
 
@@ -10,31 +10,16 @@ function Model() {
   const { actions } = useAnimations(animations, scene)
 
   useEffect(() => {
-    // Play all animations at half speed
     Object.values(actions).forEach((action) => {
       if (action) {
-        action.setEffectiveTimeScale(0.5)
+        action.setEffectiveTimeScale(0.4)
         action.play()
       }
     })
   }, [actions])
 
   return (
-    <group>
-      <primitive object={scene} scale={2.5} />
-      <OrbitControls
-        enableZoom={false}
-        autoRotate={false}
-        enableRotate={false}
-      />
-      <Html
-        position={[4, 2, 0]}  // Moved more to the right
-        className="pointer-events-none"
-        center
-        distanceFactor={15}
-      >
-      </Html>
-    </group>
+    <primitive object={scene} scale={2.5} position={[0, -6, 1]} />
   )
 }
 
@@ -67,9 +52,9 @@ const C3PO = () => {
   }, [soundFiles])
 
   return (
-    <div className="inset-0 flex items-center justify-center h-screen">
+    <div className="w-full inset-0 flex flex-col items-center justify-center h-screen">
       <Canvas
-        camera={{ position: [10, 10, 10], fov: 35 }}
+        camera={{ position: [0, 2, 5], fov: 45 }}
         style={{ background: 'transparent' }}
       >
         <Environment preset="city" />
@@ -85,10 +70,10 @@ const C3PO = () => {
         <pointLight position={[10, 10, 10]} intensity={4} />
         <pointLight position={[-10, -10, -10]} intensity={3} />
         <Model />
-        <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.5} />
+        <OrbitControls enableZoom={false} autoRotate={false} enableRotate={false} />
       </Canvas>
     </div>
   )
 }
 
-export default C3PO;
+export default C3PO
