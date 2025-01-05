@@ -5,21 +5,27 @@ const Header = () => {
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Projects', path: '/projects' },
+    { name: 'Blog', path: '/blog' },
     { name: 'Contact', path: '/contact' }
   ];
 
   return (
-    <>
-      <header className="w-2/3 px-8 py-12 my-5 fixed left-1/2 -translate-x-1/2 backdrop-blur-md bg-white/10 shadow-lg rounded-xl hologram-container z-20">
-        <nav className="w-full flex md:flex-row justify-center flex-col gap-12 items-center text-3xl">
-          {links.map((link) => (
-            <Link key={link.path} href={link.path}>
-              <span className="star-wars-hologram-effect">{link.name}</span>
-            </Link>
-          ))}
-        </nav>
-      </header>
-    </>
+    <header className="w-2/3 px-8 py-12 my-5 fixed left-1/2 -translate-x-1/2 backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl hologram-container z-20">
+      <nav className="w-full flex md:flex-row justify-center flex-col gap-12 items-center">
+        {links.map((link) => (
+          <Link
+            key={link.path}
+            href={link.path}
+            className="relative group"
+          >
+            <span className="star-wars-hologram-effect text-2xl tracking-wider font-light transition-all duration-300 group-hover:text-white text-white/70">
+              {link.name}
+            </span>
+            <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-white/60 transition-all duration-300 group-hover:w-full"></span>
+          </Link>
+        ))}
+      </nav>
+    </header>
   );
 }
 
