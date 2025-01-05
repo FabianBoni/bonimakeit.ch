@@ -12,6 +12,17 @@ body {
   margin: 0;
 }
 
+body {
+  overflow: hidden;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+
 body::before {
   content: '';
   position: absolute;
@@ -141,4 +152,44 @@ body::before {
 
 .about-me:hover {
   transform: translateY(-2px);
+}
+
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.scene-transition {
+  position: relative;
+  overflow: hidden;
+}
+
+.scene-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  transform: translateY(-100%);
+  transition: all 1s ease;
+}
+
+.scene-transition.transitioning .scene-mask {
+  transform: translateY(0);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+main {
+  scroll-snap-type: y mandatory;
+}
+
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
