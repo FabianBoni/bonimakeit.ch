@@ -233,12 +233,12 @@ const Home = () => {
               <div className="space-y-4 text-white/80">
                 <h2 className="text-2xl font-bold">3D Models</h2>
                 <ul className="list-disc pl-5 space-y-2">
-                  <li>R2-D2 by Skandal - Licensed under Creative Commons Attribution</li>
-                  <li>Star Destroyer by TheSpaceshipper - Licensed under Creative Commons Attribution</li>
-                  <li>Death Star by Skandal - Licensed under Creative Commons Attribution</li>
-                  <li>Venator-class Star Destroyer by TheSpaceshipper - Licensed under Creative Commons Attribution</li>
-                  <li>Interdictor-class Star Destroyer by TheSpaceshipper - Licensed under Creative Commons Attribution</li>
-                  <li>Arquitens-class Light Cruiser by TheSpaceshipper - Licensed under Creative Commons Attribution</li>
+                  <li>R2-D2 by <a href="https://sketchfab.com/3d-models/r2d2-c3b6db4c7a684d1d8009ddb7f5c8e0c9" className="text-blue-300 hover:text-blue-400 underline">Skandal</a> - Licensed under Creative Commons Attribution</li>
+                  <li>Star Destroyer by <a href="https://sketchfab.com/3d-models/star-wars-imperial-class-star-destroyer-d6cdd00b0d2f4e7eb38d55c4d5d04af4" className="text-blue-300 hover:text-blue-400 underline">TheSpaceshipper</a> - Licensed under Creative Commons Attribution</li>
+                  <li>Death Star by <a href="https://sketchfab.com/3d-models/death-star-star-wars-2d25e8c9c19744a2b37e6e99f2a0d60f" className="text-blue-300 hover:text-blue-400 underline">Skandal</a> - Licensed under Creative Commons Attribution</li>
+                  <li>Venator-class Star Destroyer by <a href="https://sketchfab.com/3d-models/star-wars-venator-class-star-destroyer-c935b6dd68e14fd0b6178c001843869d" className="text-blue-300 hover:text-blue-400 underline">TheSpaceshipper</a> - Licensed under Creative Commons Attribution</li>
+                  <li>Interdictor-class Star Destroyer by <a href="https://sketchfab.com/3d-models/star-wars-interdictor-class-star-destroyer-d6cdd00b0d2f4e7eb38d55c4d5d04af4" className="text-blue-300 hover:text-blue-400 underline">TheSpaceshipper</a> - Licensed under Creative Commons Attribution</li>
+                  <li>Arquitens-class Light Cruiser by <a href="https://sketchfab.com/3d-models/star-wars-arquitens-class-light-cruiser-d6cdd00b0d2f4e7eb38d55c4d5d04af4" className="text-blue-300 hover:text-blue-400 underline">TheSpaceshipper</a> - Licensed under Creative Commons Attribution</li>
                 </ul>
               </div>
             </div>
