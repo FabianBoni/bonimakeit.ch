@@ -15,7 +15,7 @@ export function Arquitens() {
   const router = useRouter()
 
   const handleClick = () => {
-    router.push('/projects/autotrade')
+    router.push('/projects/immolink')
   }
 
   useFrame(({ clock }) => {
@@ -46,7 +46,7 @@ export function Arquitens() {
       <Html position={position as [number, number, number]} style={{ cursor: 'pointer' }}>
         <div onClick={handleClick}>
           <div className="bg-black/80 text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap mb-2">
-            AutoTrade
+            Immolink
           </div>
           <PulsingCircle x={0} y={0} />
         </div>
