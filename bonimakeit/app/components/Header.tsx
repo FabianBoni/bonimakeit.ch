@@ -3,8 +3,8 @@ import Link from "next/link";
 const Header = () => {
   const links = [
     { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Projects', path: '/projects' },
+    { name: 'About', path: '/#section2' },
+    { name: 'Projects', path: '/#section3' },
     { name: 'Blog', path: '/blog' },
     { name: 'Contact', path: '/contact' }
   ];
@@ -18,7 +18,7 @@ const Header = () => {
             href={link.path}
             className="relative group"
           >
-            <span className="star-wars-hologram-effect text-2xl tracking-wider font-light transition-all duration-300 group-hover:text-white text-white/70">
+            <span className="star-wars-hologram-effect text-3xl tracking-wider font-medium transition-all duration-300 group-hover:text-white text-white/70">
               {link.name}
             </span>
             <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-white/60 transition-all duration-300 group-hover:w-full"></span>

@@ -6,7 +6,7 @@ import { IoArrowBackCircleSharp } from "react-icons/io5";
 
 export default function Stepperly() {
     return (
-        <main className="min-h-screen bg-gray-900 text-white">
+        <main className="h-screen overflow-y-auto bg-gray-900 text-white scroll-smooth">
             {/* Hero Section */}
             <div className="relative h-[60vh] w-full">
                 <Image
@@ -15,6 +15,7 @@ export default function Stepperly() {
                     fill
                     className="object-cover"
                     priority
+                    unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900" />
                 <div className="absolute bottom-10 left-10">
@@ -116,7 +117,7 @@ export default function Stepperly() {
                         Visit Stepperly
                     </a>
                     <Link
-                        href="/"
+                        href="/#section3"
                         className="flex flex-row gap-4 items-center bg-gray-900 text-white px-6 py-3 rounded-lg 
               hover:bg-gray-700 transition-colors"
                     >

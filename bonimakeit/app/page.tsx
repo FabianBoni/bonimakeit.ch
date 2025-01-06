@@ -9,6 +9,7 @@ import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls } from "@react-three/drei";
 import Interdictor from "./components/Interdictor";
 import Header from "./components/Header";
+import Arquitens from "./components/Arquitens";
 
 const Home = () => {
   const [currentSection, setCurrentSection] = useState(0);
@@ -210,6 +211,7 @@ const Home = () => {
                   <DeathStar />
                   <Venator />
                   <Interdictor />
+                  <Arquitens />
                   <OrbitControls enableZoom={false} enableRotate={false} />
                 </Canvas>
               </div>
