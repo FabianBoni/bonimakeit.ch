@@ -2,12 +2,12 @@
 
 import { Canvas } from '@react-three/fiber'
 import { useGLTF, OrbitControls, Environment, Html } from '@react-three/drei'
-import { Howl } from 'howler'
 import { useEffect, useState } from 'react'
 
 function Model() {
+  const { scene} = useGLTF("/r2d2/scene.gltf", true)
+  
   const [message, setMessage] = useState('')
-  const [currentText, setCurrentText] = useState('')
   const [currentIndex, setCurrentIndex] = useState(0)
   const messages = [
     "Oh hi, you must be a new visitor! Master Fabian is here to greet you!",
@@ -35,12 +35,11 @@ function Model() {
     }
   }, [currentIndex, messageIndex])
 
-  const { scene } = useGLTF("/r2d2/scene.gltf", true)
   return (
     <group>
       <primitive object={scene} scale={2.5} />
       <Html
-        position={[4, 2, 0]}  // Moved more to the right
+        position={[4, 2, 0]}
         className="pointer-events-none"
         center
         distanceFactor={15}
@@ -56,33 +55,6 @@ function Model() {
 }
 
 const R2 = () => {
-  const [soundFiles, setSoundFiles] = useState<string[]>([])
-
-  useEffect(() => {
-    fetch('/api/sounds')
-      .then(response => response.json())
-      .then(files => setSoundFiles(files))
-  }, [])
-
-  useEffect(() => {
-    if (soundFiles.length === 0) return
-
-    const playRandomSound = () => {
-      const randomIndex = Math.floor(Math.random() * soundFiles.length)
-      const sound = new Howl({
-        src: [`/sounds/${soundFiles[randomIndex]}`],
-        volume: 0.5,
-        loop: false
-      })
-      sound.play()
-    }
-
-    const interval = setInterval(playRandomSound, 10000)
-    playRandomSound()
-
-    return () => clearInterval(interval)
-  }, [soundFiles])
-
   return (
     <div className="-mt-[100px] w-full h-screen inset-0 flex items-center justify-center">
       <Canvas
@@ -108,4 +80,4 @@ const R2 = () => {
   )
 }
 
-export default R2;
+export default R2
