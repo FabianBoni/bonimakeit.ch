@@ -59,9 +59,8 @@ const Home = () => {
       e.preventDefault();
 
       if (isTransitioning) return;
-
       if (e.deltaY > 0) {
-        if (currentSection < 2) {
+        if (currentSection < 3) {
           setIsTransitioning(true);
           setCurrentSection(prev => prev + 1);
           setTimeout(() => {
@@ -174,8 +173,9 @@ const Home = () => {
           </section>
           <section
             id="section3"
-            className={`scene-transition w-full h-screen flex items-center flex-row justify-between bg-[url('/images/space.jpg')] bg-cover bg-center bg-no-repeat ${currentSection === 1 ? 'transitioning' : ''}`}
+            className={`scene-transition w-full h-screen flex items-center flex-row justify-between bg-[url('/images/space.jpg')] bg-cover bg-top bg-no-repeat ${currentSection === 1 ? 'transitioning' : ''}`}
           >
+            <div className="absolute w-full h-full bg-black opacity-35" />
             <div className="absolute top-48 left-1/2 transform -translate-x-1/2 z-10">
               <h1 className="text-6xl font-bold text-white tracking-wider 
                  [text-shadow:_0_1px_0_rgb(255_255_255_/_40%),_0_2px_0_rgb(255_255_255_/_30%),_0_3px_0_rgb(255_255_255_/_20%),_0_4px_0_rgb(255_255_255_/_10%),_0_5px_0_rgb(255_255_255_/_5%)]">
@@ -217,6 +217,31 @@ const Home = () => {
               </div>
             </div>
             <div className="scene-mask"></div>
+          </section>
+          <section
+            id="section4"
+            className={`scene-transition w-full h-screen flex items-center flex-row justify-between bg-[url('/images/space.jpg')] bg-cover bg-bottom bg-no-repeat ${currentSection === 2 ? 'transitioning' : ''}`}
+          >
+            <div className="absolute w-full h-full bg-black opacity-35" />
+            <div className="absolute top-48 left-1/2 transform -translate-x-1/2 z-10">
+              <h1 className="text-6xl font-bold text-white tracking-wider 
+       [text-shadow:_0_1px_0_rgb(255_255_255_/_40%),_0_2px_0_rgb(255_255_255_/_30%),_0_3px_0_rgb(255_255_255_/_20%),_0_4px_0_rgb(255_255_255_/_10%),_0_5px_0_rgb(255_255_255_/_5%)]">
+                CREDITS
+              </h1>
+            </div>
+            <div className="absolute flex flex-col items-center gap-8 !top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 p-8 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 shadow-lg">
+              <div className="space-y-4 text-white/80">
+                <h2 className="text-2xl font-bold">3D Models</h2>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>R2-D2 by Skandal - Licensed under Creative Commons Attribution</li>
+                  <li>Star Destroyer by TheSpaceshipper - Licensed under Creative Commons Attribution</li>
+                  <li>Death Star by Skandal - Licensed under Creative Commons Attribution</li>
+                  <li>Venator-class Star Destroyer by TheSpaceshipper - Licensed under Creative Commons Attribution</li>
+                  <li>Interdictor-class Star Destroyer by TheSpaceshipper - Licensed under Creative Commons Attribution</li>
+                  <li>Arquitens-class Light Cruiser by TheSpaceshipper - Licensed under Creative Commons Attribution</li>
+                </ul>
+              </div>
+            </div>
           </section>
         </div>
       </main>
