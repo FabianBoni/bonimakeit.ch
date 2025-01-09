@@ -1,12 +1,11 @@
 'use client'
-
 import { Canvas } from '@react-three/fiber'
 import { useGLTF, OrbitControls, Environment, Html } from '@react-three/drei'
 import { useEffect, useState } from 'react'
 
 function Model() {
-  const { scene} = useGLTF("/r2d2/scene.gltf", true)
-  
+  const { scene } = useGLTF("/r2d2/scene.gltf", true)
+  const [isMobile, setIsMobile] = useState(false)
   const [message, setMessage] = useState('')
   const [currentIndex, setCurrentIndex] = useState(0)
   const messages = [
@@ -15,6 +14,15 @@ function Model() {
     "Have fun on my portfolio!"
   ]
   const [messageIndex, setMessageIndex] = useState(0)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     if (currentIndex < messages[messageIndex].length) {
@@ -37,12 +45,15 @@ function Model() {
 
   return (
     <group>
-      <primitive object={scene} scale={2.5} />
+      <primitive 
+        object={scene} 
+        scale={isMobile ? 1.5 : 2.5} 
+      />
       <Html
-        position={[4, 2, 0]}
+        position={[isMobile ? 2 : 4, isMobile ? 1 : 2, 0]}
         className="pointer-events-none"
         center
-        distanceFactor={15}
+        distanceFactor={isMobile ? 10 : 15}
       >
         <div className="hologram-bubble-container">
           <div className="hologram-bubble">
@@ -55,10 +66,24 @@ function Model() {
 }
 
 const R2 = () => {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   return (
     <div className="-mt-[100px] w-full h-screen inset-0 flex items-center justify-center">
       <Canvas
-        camera={{ position: [10, 10, 10], fov: 35 }}
+        camera={{ 
+          position: isMobile ? [5, 5, 5] : [10, 10, 10], 
+          fov: isMobile ? 50 : 35 
+        }}
         style={{ background: 'transparent' }}
       >
         <Environment preset="city" />
