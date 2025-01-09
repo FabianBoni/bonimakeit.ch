@@ -6,6 +6,7 @@ import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import Link from 'next/link'
 import Image from 'next/image'
+import MobileMenu from '@/app/components/MobileMenu'
 
 interface Post {
   __typename: "Post";
@@ -29,6 +30,7 @@ interface Post {
 
 export default function Blog() {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -48,12 +50,50 @@ export default function Blog() {
     fetchPosts();
   }, []);
 
-  return (
-    <main className="min-h-screen relative bg-black">
-      <Header />
-      <div className="stars" id="stars"></div>
+  useEffect(() => {
+    const numberOfStars: number = 200;
+    const container: HTMLElement | null = document.getElementById('stars');
+    const stars: HTMLDivElement[] = [];
 
-      <div className="pt-48 pb-20 px-4 max-w-7xl mx-auto relative z-10">
+    if (container) {
+      for (let i = 0; i < numberOfStars; i++) {
+        const star: HTMLDivElement = document.createElement('div');
+        star.className = 'star';
+        star.style.top = `${Math.random() * 100}vh`;
+        star.style.left = `${Math.random() * 100}vw`;
+        container.appendChild(star);
+        stars.push(star);
+      }
+
+      const animateStars = (): void => {
+        stars.forEach((star: HTMLDivElement) => {
+          if (Math.random() < 0.1) {
+            const targetOpacity: string = star.style.opacity === '0' ? '1' : '0';
+            star.style.opacity = targetOpacity;
+            star.style.transition = `opacity ${Math.random() * 2 + 0.5}s`;
+          }
+        });
+      };
+
+      const intervalId: NodeJS.Timeout = setInterval(animateStars, 100);
+      return () => clearInterval(intervalId);
+    }
+  }, []);
+
+  return (
+    <main className="min-h-screen relative bg-black overflow-auto">
+      <div className="flex items-center fixed top-0 left-0 h-[50px] w-full z-50 md:backdrop-blur-none backdrop-blur-md">
+        <button
+          onClick={() => setIsMenuOpen(true)}
+          className="md:hidden text-white text-2xl absolute right-4"
+        >
+          ☰
+        </button>
+      </div>
+      <Header />
+      <div className="stars h-full w-full absolute z-10" id="stars"></div>
+
+      <div className="pt-12 md:pt-48 pb-20 px-4 max-w-7xl mx-auto relative z-10">
         <h1 className="text-6xl font-bold text-white mb-12 text-center tracking-wider
           [text-shadow:_0_1px_0_rgb(255_255_255_/_40%),_0_2px_0_rgb(255_255_255_/_30%),_0_3px_0_rgb(255_255_255_/_20%)]">
           Latest Articles
@@ -94,6 +134,7 @@ export default function Blog() {
         </div>
       </div>
       <Footer />
+      <MobileMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
     </main>
   )
 }

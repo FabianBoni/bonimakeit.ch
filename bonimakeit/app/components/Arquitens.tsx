@@ -34,7 +34,7 @@ export function Arquitens() {
 
     const x = Math.cos(time * 0.005) * orbitRadius
     const z = Math.sin(time * 0.005) * orbitRadius
-    const y = Math.sin(time * 0.0002) * (isMobile ? -120 : -20)
+    const y = Math.sin(time * 0.0002) * (isMobile ? -30 : -20)
 
     modelRef.current.position.x = x
     modelRef.current.position.z = z

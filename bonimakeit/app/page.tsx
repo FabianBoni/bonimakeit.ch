@@ -12,6 +12,8 @@ import Interdictor from "./components/Interdictor";
 import Header from "./components/Header";
 import Arquitens from "./components/Arquitens";
 import Footer from './components/Footer';
+import { useRouter } from "next/navigation";
+import MobileMenu from "./components/MobileMenu";
 
 const SideNav = ({ currentSection, setCurrentSection }: { currentSection: number, setCurrentSection: (section: number) => void }) => {
   const sections = [
@@ -57,32 +59,6 @@ const SideNav = ({ currentSection, setCurrentSection }: { currentSection: number
   );
 };
 
-const MobileMenu = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (isOpen: boolean) => void }) => {
-  return (
-    <div className={`fixed inset-0 bg-black/90 backdrop-blur-md z-50 transition-transform duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-      <button onClick={() => setIsOpen(false)} className="absolute top-6 right-6 text-white text-2xl">
-        ✕
-      </button>
-      <nav className="flex flex-col items-center justify-center h-full">
-        <div className="space-y-8">
-          {['Welcome', 'About Me', 'Projects', 'Credits'].map((item, index) => (
-            <div
-              key={item}
-              className="text-white text-2xl text-center"
-              onClick={() => {
-                document.getElementById(`section${index + 1}`)?.scrollIntoView({ behavior: 'smooth' });
-                setIsOpen(false);
-              }}
-            >
-              {item}
-            </div>
-          ))}
-        </div>
-      </nav>
-    </div>
-  );
-};
-
 const SoundControl = ({ isMuted, toggleMute }: { isMuted: boolean; toggleMute: () => void }) => (
   <button
     onClick={toggleMute}
@@ -111,6 +87,14 @@ const Home = () => {
 
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflowY = 'hidden'
+
+    return () => {
+      document.body.style.overflowY = ''
+    }
+  }, [])
 
   const toggleMute = () => {
     setIsMuted(!isMuted);
@@ -275,6 +259,19 @@ const Home = () => {
                     <p className="leading-relaxed hidden md:block">
                       I look forward to bringing my passion for technology, creativity, and problem-solving to a forward-thinking company where I can grow and contribute to exciting advancements in the field.
                     </p>
+                  </div>
+                  <div className="flex justify-center md:justify-start mt-6">
+                    <a
+                      href="/cv/fabian-boni-cv.pdf"
+                      download
+                      className="px-6 py-3 rounded-lg backdrop-blur-md bg-white/10 border border-white/20 
+        text-white hover:bg-white/20 transition-all duration-300 flex items-center gap-2"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                      </svg>
+                      Download CV
+                    </a>
                   </div>
                 </div>
               </div>

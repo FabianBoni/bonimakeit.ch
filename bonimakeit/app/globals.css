@@ -14,7 +14,6 @@ body {
 }
 
 body {
-  overflow: hidden;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
@@ -24,7 +23,7 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-body::before {
+#section1::before {
   content: '';
   position: absolute;
   top: 0;
@@ -176,7 +175,6 @@ body::before {
   background-color: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(10px);
   transform: translateY(-100%);
-  transition: all 1s ease;
 }
 
 .scene-transition.transitioning .scene-mask {
@@ -194,4 +192,8 @@ main {
 section {
   scroll-snap-align: start;
   scroll-snap-stop: always;
+}
+
+.stars {
+  pointer-events: none;
 }

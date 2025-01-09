@@ -4,8 +4,11 @@ import { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { FaMapMarkerAlt, FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
+import MobileMenu from '../../components/MobileMenu';
 
 export default function Contact() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -49,6 +52,14 @@ export default function Contact() {
 
   return (
     <main className="min-h-screen relative bg-black">
+      <div className="flex items-center fixed top-0 left-0 h-[50px] w-full z-50 md:backdrop-blur-none backdrop-blur-md">
+        <button
+          onClick={() => setIsMenuOpen(true)}
+          className="md:hidden text-white text-2xl absolute right-4"
+        >
+          ☰
+        </button>
+      </div>
       <Header />
       <div className="w-full h-full absolute z-10 stars" id="stars"></div>
 
@@ -154,11 +165,11 @@ export default function Contact() {
               </h2>
 
               <div className="flex space-x-6">
-                <a href="https://github.com/yourusername"
+                <a href="https://github.com/FabianBoni"
                   className="text-3xl text-white/80 hover:text-blue-400 transition-all duration-300 transform hover:scale-110">
                   <FaGithub />
                 </a>
-                <a href="https://linkedin.com/in/yourusername"
+                <a href="https://ch.linkedin.com/in/fabian-boni-82a5ba192"
                   className="text-3xl text-white/80 hover:text-blue-400 transition-all duration-300 transform hover:scale-110">
                   <FaLinkedin />
                 </a>
@@ -168,6 +179,7 @@ export default function Contact() {
         </div>
       </div>
       <Footer />
+      <MobileMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
     </main>
   );
 }

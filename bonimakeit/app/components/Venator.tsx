@@ -34,11 +34,11 @@ export function Venator() {
 
     const x = Math.cos(time * 0.005) * orbitRadius
     const z = Math.sin(time * 0.005) * orbitRadius
-    const y = Math.sin(time * 0.0001) * (isMobile ? 50 : 2)
+    const y = Math.sin(time * 0.0001) * (isMobile ? 5 : 2)
 
     modelRef.current.position.x = x
     modelRef.current.position.z = z
-    modelRef.current.position.y = y
+    modelRef.current.position.y = y 
 
     modelRef.current.rotation.y = -time * 0.005
     modelRef.current.rotation.z = Math.sin(time * 0.0001) * (isMobile ? 0.025 : 0.05)
@@ -53,7 +53,7 @@ export function Venator() {
         object={scene}
         scale={isMobile ? 0.1 : 0.2}
         // In Venator.tsx, update the primitive position
-        position={[isMobile ? 0 : 5, 0, 0]}
+        position={[isMobile ? 2.5 : 8, 0, 0]}
       />
       <Html position={position as [number, number, number]} style={{ cursor: 'pointer' }}>
         <div onClick={handleClick}>
