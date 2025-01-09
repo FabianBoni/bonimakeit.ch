@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
-import client from '../../../../tina/__generated__/client'
+import client from '../../../../t_conf/__generated__/client'
 import Header from '../../../components/Header'
 import Footer from '../../../components/Footer'
 import Link from 'next/link'
