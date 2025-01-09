@@ -10,6 +10,7 @@ import { Environment, OrbitControls } from "@react-three/drei";
 import Interdictor from "./components/Interdictor";
 import Header from "./components/Header";
 import Arquitens from "./components/Arquitens";
+import Footer from './components/Footer';
 
 const Home = () => {
   const [currentSection, setCurrentSection] = useState(0);
@@ -244,6 +245,7 @@ const Home = () => {
             </div>
           </section>
         </div>
+        <Footer />
       </main>
     </>
   );
