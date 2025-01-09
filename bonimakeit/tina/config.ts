@@ -1,12 +1,5 @@
 import { defineConfig } from "tinacms";
 
-// Your hosting provider likely exposes this as an environment variable
-const branch =
-  process.env.GITHUB_BRANCH ||
-  process.env.VERCEL_GIT_COMMIT_REF ||
-  process.env.HEAD ||
-  "main";
-
 export default defineConfig({
   branch: process.env.VERCEL_GIT_COMMIT_REF || "",
   clientId: "b4148322-695c-4df4-bbec-23c8b5b9764a",
