@@ -17,14 +17,15 @@ const Footer = () => {
               GitHub
             </Link>
             <Link 
-              href="https://linkedin.com/in/fabian-boni" 
+              href="https://linkedin.com/in/fabian-boni-82a5ba192" 
               target="_blank"
               className="text-white/70 hover:text-white/90 transition-colors"
             >
               LinkedIn
             </Link>
             <Link 
-              href="mailto:contact@bonimakeit.ch"
+              href="/pages/contact"
+              target='_blank'
               className="text-white/70 hover:text-white/90 transition-colors"
             >
               Contact

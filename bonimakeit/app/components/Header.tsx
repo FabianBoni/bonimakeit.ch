@@ -10,7 +10,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="w-2/3 px-8 py-12 my-5 fixed left-1/2 -translate-x-1/2 backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl hologram-container z-20">
+    <header className="hidden md:block w-2/3 px-8 py-12 my-5 fixed left-1/2 -translate-x-1/2 backdrop-blur-md bg-white/10 border border-white/20 shadow-lg rounded-xl hologram-container z-20">
       <nav className="w-full flex md:flex-row justify-center flex-col gap-12 items-center">
         {links.map((link) => (
           <Link

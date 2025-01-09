@@ -20,9 +20,8 @@ const SideNav = ({ currentSection, setCurrentSection }: { currentSection: number
     { id: 3, name: "Projects", icon: "🚀" },
     { id: 4, name: "Credits", icon: "✨" },
   ];
-
   return (
-    <nav className="fixed left-8 top-1/2 transform -translate-y-1/2 z-20">
+    <nav className="fixed left-8 top-1/2 transform -translate-y-1/2 z-20 hidden md:block">
       <div className="space-y-4">
         {sections.map((section) => (
           <div
@@ -58,6 +57,32 @@ const SideNav = ({ currentSection, setCurrentSection }: { currentSection: number
   );
 };
 
+const MobileMenu = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (isOpen: boolean) => void }) => {
+  return (
+    <div className={`fixed inset-0 bg-black/90 backdrop-blur-md z-50 transition-transform duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <button onClick={() => setIsOpen(false)} className="absolute top-6 right-6 text-white text-2xl">
+        ✕
+      </button>
+      <nav className="flex flex-col items-center justify-center h-full">
+        <div className="space-y-8">
+          {['Welcome', 'About Me', 'Projects', 'Credits'].map((item, index) => (
+            <div
+              key={item}
+              className="text-white text-2xl text-center"
+              onClick={() => {
+                document.getElementById(`section${index + 1}`)?.scrollIntoView({ behavior: 'smooth' });
+                setIsOpen(false);
+              }}
+            >
+              {item}
+            </div>
+          ))}
+        </div>
+      </nav>
+    </div>
+  );
+};
+
 const SoundControl = ({ isMuted, toggleMute }: { isMuted: boolean; toggleMute: () => void }) => (
   <button
     onClick={toggleMute}
@@ -73,6 +98,7 @@ const Home = () => {
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [sounds, setSounds] = useState<string[]>([]);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMute = () => {
     setIsMuted(!isMuted);
@@ -173,6 +199,14 @@ const Home = () => {
   return (
     <>
       <Header />
+      <div className="md:hidden flex items-center fixed top-0 left-0 h-[50px] w-full z-50 backdrop-blur-md">
+        <button
+          onClick={() => setIsMobileMenuOpen(true)}
+          className="text-white text-2xl absolute right-4"
+        >
+          ☰
+        </button>
+      </div>
       <main className="relative h-screen overflow-hidden">
         <SideNav currentSection={currentSection} setCurrentSection={setCurrentSection} />
         <SoundControl isMuted={isMuted} toggleMute={toggleMute} />
@@ -303,6 +337,7 @@ const Home = () => {
           </section>
         </div>
         <Footer />
+        <MobileMenu isOpen={isMobileMenuOpen} setIsOpen={setIsMobileMenuOpen} />
       </main>
     </>
   );
