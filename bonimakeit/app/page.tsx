@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react";
+import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 import R2 from "./components/R2";
 import StarDestroyer from "./components/StarDestroyer";
 import DeathStar from "./components/DeathStar";
@@ -12,11 +13,73 @@ import Header from "./components/Header";
 import Arquitens from "./components/Arquitens";
 import Footer from './components/Footer';
 
+const SideNav = ({ currentSection, setCurrentSection }: { currentSection: number, setCurrentSection: (section: number) => void }) => {
+  const sections = [
+    { id: 1, name: "Welcome", icon: "🌟" },
+    { id: 2, name: "About Me", icon: "👨‍💻" },
+    { id: 3, name: "Projects", icon: "🚀" },
+    { id: 4, name: "Credits", icon: "✨" },
+  ];
+
+  return (
+    <nav className="fixed left-8 top-1/2 transform -translate-y-1/2 z-20">
+      <div className="space-y-4">
+        {sections.map((section) => (
+          <div
+            key={section.id}
+            className={`group flex items-center cursor-pointer`}
+            onClick={() => {
+              setCurrentSection(section.id - 1);
+              document.getElementById(`section${section.id}`)?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            <div
+              className={`w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-md border 
+              transition-all duration-300 ${currentSection === section.id - 1
+                  ? "bg-white/20 border-white scale-110"
+                  : "bg-white/5 border-white/20 hover:bg-white/10"
+                }`}
+            >
+              <span className="text-xl">{section.icon}</span>
+            </div>
+            <div
+              className={`ml-4 py-2 px-4 rounded-lg backdrop-blur-md transition-all duration-300 
+              ${currentSection === section.id - 1
+                  ? "opacity-100 translate-x-0 bg-white/20"
+                  : "opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 bg-white/5"
+                }`}
+            >
+              <span className="text-white whitespace-nowrap">{section.name}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </nav>
+  );
+};
+
+const SoundControl = ({ isMuted, toggleMute }: { isMuted: boolean; toggleMute: () => void }) => (
+  <button
+    onClick={toggleMute}
+    className="fixed right-8 top-24 z-20 w-12 h-12 rounded-full backdrop-blur-md bg-white/5 border border-white/20 
+    flex items-center justify-center transition-all duration-300 hover:bg-white/10"
+  >
+    {isMuted ? <FaVolumeMute className="text-white text-xl" /> : <FaVolumeUp className="text-white text-xl" />}
+  </button>
+);
+
 const Home = () => {
   const [currentSection, setCurrentSection] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [sounds, setSounds] = useState<string[]>([]);
+
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+    if (audioRef.current) {
+      audioRef.current.muted = !isMuted;
+    }
+  };
 
   useEffect(() => {
     fetch('/api/sounds')
@@ -27,7 +90,7 @@ const Home = () => {
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
 
-    if (currentSection === 0 && sounds.length > 0) {
+    if (currentSection === 0 && sounds.length > 0 && !isMuted) {
       const playRandomSound = () => {
         if (audioRef.current) {
           audioRef.current.pause();
@@ -37,6 +100,7 @@ const Home = () => {
         const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
         audioRef.current = new Audio(`/sounds/${randomSound}`);
         audioRef.current.volume = 0.5;
+        audioRef.current.muted = isMuted;
         audioRef.current.play();
 
         const randomDelay = Math.floor(Math.random() * (10000 - 5000) + 5000);
@@ -53,37 +117,28 @@ const Home = () => {
         audioRef.current = null;
       }
     };
-  }, [currentSection, sounds]);
+  }, [currentSection, sounds, isMuted]);
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
 
-      if (isTransitioning) return;
       if (e.deltaY > 0) {
         if (currentSection < 3) {
-          setIsTransitioning(true);
           setCurrentSection(prev => prev + 1);
-          setTimeout(() => {
-            document.getElementById(`section${currentSection + 2}`)?.scrollIntoView({ behavior: 'smooth' });
-            setIsTransitioning(false);
-          }, 1000);
+          document.getElementById(`section${currentSection + 2}`)?.scrollIntoView({ behavior: 'smooth' });
         }
       } else if (e.deltaY < 0) {
         if (currentSection > 0) {
-          setIsTransitioning(true);
           setCurrentSection(prev => prev - 1);
-          setTimeout(() => {
-            document.getElementById(`section${currentSection}`)?.scrollIntoView({ behavior: 'smooth' });
-            setIsTransitioning(false);
-          }, 1000);
+          document.getElementById(`section${currentSection}`)?.scrollIntoView({ behavior: 'smooth' });
         }
       }
     };
 
     window.addEventListener('wheel', handleWheel, { passive: false });
     return () => window.removeEventListener('wheel', handleWheel);
-  }, [currentSection, isTransitioning]);
+  }, [currentSection]);
 
   useEffect(() => {
     const numberOfStars: number = 200;
@@ -119,11 +174,13 @@ const Home = () => {
     <>
       <Header />
       <main className="relative h-screen overflow-hidden">
+        <SideNav currentSection={currentSection} setCurrentSection={setCurrentSection} />
+        <SoundControl isMuted={isMuted} toggleMute={toggleMute} />
         <div className="stars" id="stars"></div>
         <div className="w-full relative z-10">
           <section
             id="section1"
-            className={`scene-transition w-full mt-[100px] h-screen mx-auto flex items-center justify-center ${currentSection === 1 ? 'transitioning' : ''}`}
+            className={`scene-transition w-full mt-[100px] h-screen mx-auto flex items-center justify-center`}
           >
             <div className="!absolute top-1/2 translate-y-[-35%] scene">
               <R2 />
@@ -132,7 +189,7 @@ const Home = () => {
           </section>
           <section
             id="section2"
-            className={`scene-transition w-full h-screen flex items-center flex-row justify-between bg-[url('/images/tatooinebig.jpg')] bg-cover bg-center bg-no-repeat ${currentSection === 0 ? 'transitioning' : ''}`}
+            className={`scene-transition w-full h-screen flex items-center flex-row justify-between bg-[url('/images/tatooinebig.jpg')] bg-cover bg-center bg-no-repeat`}
           >
             <div className="absolute top-48 left-1/2 transform -translate-x-1/2 z-10">
               <h1 className="text-6xl font-bold text-white tracking-wider 
@@ -174,7 +231,7 @@ const Home = () => {
           </section>
           <section
             id="section3"
-            className={`scene-transition w-full h-screen flex items-center flex-row justify-between bg-[url('/images/space.jpg')] bg-cover bg-top bg-no-repeat ${currentSection === 1 ? 'transitioning' : ''}`}
+            className={`scene-transition w-full h-screen flex items-center flex-row justify-between bg-[url('/images/space.jpg')] bg-cover bg-top bg-no-repeat`}
           >
             <div className="absolute w-full h-full bg-black opacity-35" />
             <div className="absolute top-48 left-1/2 transform -translate-x-1/2 z-10">
@@ -221,12 +278,12 @@ const Home = () => {
           </section>
           <section
             id="section4"
-            className={`scene-transition w-full h-screen flex items-center flex-row justify-between bg-[url('/images/space.jpg')] bg-cover bg-bottom bg-no-repeat ${currentSection === 2 ? 'transitioning' : ''}`}
+            className={`scene-transition w-full h-screen flex items-center flex-row justify-between bg-[url('/images/space.jpg')] bg-cover bg-bottom bg-no-repeat`}
           >
-            <div className="absolute w-full h-full bg-black opacity-35" />
+            <div className="absolute w-full h-full bg-black opacity-50" />
             <div className="absolute top-48 left-1/2 transform -translate-x-1/2 z-10">
               <h1 className="text-6xl font-bold text-white tracking-wider 
-       [text-shadow:_0_1px_0_rgb(255_255_255_/_40%),_0_2px_0_rgb(255_255_255_/_30%),_0_3px_0_rgb(255_255_255_/_20%),_0_4px_0_rgb(255_255_255_/_10%),_0_5px_0_rgb(255_255_255_/_5%)]">
+    [text-shadow:_0_1px_0_rgb(255_255_255_/_40%),_0_2px_0_rgb(255_255_255_/_30%),_0_3px_0_rgb(255_255_255_/_20%),_0_4px_0_rgb(255_255_255_/_10%),_0_5px_0_rgb(255_255_255_/_5%)]">
                 CREDITS
               </h1>
             </div>
