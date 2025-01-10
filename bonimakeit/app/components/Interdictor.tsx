@@ -13,6 +13,7 @@ interface InterdictorProps {
 }
 
 export function Interdictor({ position = [0, 0, 0], rotation = [0, 0, 0] }: InterdictorProps) {
+  useGLTF.preload("/interdictor/scene.gltf");
   const { scene } = useGLTF("/interdictor/scene.gltf", true)
   const modelRef = useRef<THREE.Group>(null!)
   const [modelPosition, setModelPosition] = useState<[number, number, number]>(position)

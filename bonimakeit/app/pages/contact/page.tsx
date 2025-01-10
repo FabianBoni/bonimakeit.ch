@@ -51,135 +51,137 @@ export default function Contact() {
   };
 
   return (
-    <main className="min-h-screen relative bg-black">
-      <div className="flex items-center fixed top-0 left-0 h-[50px] w-full z-50 md:backdrop-blur-none backdrop-blur-md">
-        <button
-          onClick={() => setIsMenuOpen(true)}
-          className="md:hidden text-white text-2xl absolute right-4"
-        >
-          ☰
-        </button>
-      </div>
+    <>
       <Header />
-      <div className="w-full h-full absolute z-10 stars" id="stars"></div>
+      <main className="min-h-screen pt-[100px] z-0 relative bg-black">
+        <div className="flex items-center fixed top-0 left-0 h-[50px] w-full z-50 md:backdrop-blur-none backdrop-blur-md">
+          <button
+            onClick={() => setIsMenuOpen(true)}
+            className="md:hidden text-white text-2xl absolute right-4"
+          >
+            ☰
+          </button>
+        </div>
+        <div className="w-full h-full absolute z-10 stars" id="stars"></div>
 
-      <div className="flex items-center justify-center min-h-screen pt-20 pb-20">
-        <div className="w-full relative z-20 max-w-6xl mx-4 grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Contact Form Section */}
-          <div className="backdrop-blur-md bg-white/5 border border-white/20 rounded-xl p-8 shadow-2xl">
-            <h1 className="text-4xl font-bold text-white mb-8 tracking-wider
+        <div className="flex items-center justify-center min-h-screen pt-20 pb-20">
+          <div className="w-full relative z-20 max-w-6xl mx-4 grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Contact Form Section */}
+            <div className="backdrop-blur-md bg-white/5 border border-white/20 rounded-xl p-8 shadow-2xl">
+              <h1 className="text-4xl font-bold text-white mb-8 tracking-wider
               [text-shadow:_0_1px_0_rgb(255_255_255_/_40%),_0_2px_0_rgb(255_255_255_/_30%),_0_3px_0_rgb(255_255_255_/_20%)]">
-              Get in Touch
-            </h1>
+                Get in Touch
+              </h1>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-white/80 mb-2 text-lg">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white 
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-white/80 mb-2 text-lg">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white 
                     focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent
                     placeholder-white/30 transition-all duration-300 hover:bg-white/15"
-                  placeholder="Enter your name"
-                  required
-                />
-              </div>
+                    placeholder="Enter your name"
+                    required
+                  />
+                </div>
 
-              <div>
-                <label htmlFor="email" className="block text-white/80 mb-2 text-lg">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white 
+                <div>
+                  <label htmlFor="email" className="block text-white/80 mb-2 text-lg">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white 
                     focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent
                     placeholder-white/30 transition-all duration-300 hover:bg-white/15"
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
+                    placeholder="Enter your email"
+                    required
+                  />
+                </div>
 
-              <div>
-                <label htmlFor="message" className="block text-white/80 mb-2 text-lg">Message</label>
-                <textarea
-                  id="message"
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white 
+                <div>
+                  <label htmlFor="message" className="block text-white/80 mb-2 text-lg">Message</label>
+                  <textarea
+                    id="message"
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white 
                     focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent
                     placeholder-white/30 transition-all duration-300 hover:bg-white/15 min-h-[200px] resize-none"
-                  placeholder="Your message"
-                  required
-                />
-              </div>
+                    placeholder="Your message"
+                    required
+                  />
+                </div>
 
-              <button
-                type="submit"
-                className="w-full py-4 px-6 rounded-lg bg-blue-500/80 hover:bg-blue-600/80 
+                <button
+                  type="submit"
+                  className="w-full py-4 px-6 rounded-lg bg-blue-500/80 hover:bg-blue-600/80 
                   text-white font-semibold transition-all duration-300 
                   backdrop-blur-sm shadow-lg hover:shadow-blue-500/25 transform hover:scale-105"
-              >
-                Send Message
-              </button>
-            </form>
-          </div>
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
 
-          {/* Contact Information Section */}
-          <div className="space-y-8">
-            <div className="backdrop-blur-md bg-white/5 border border-white/20 rounded-xl p-8 shadow-2xl">
-              <h2 className="text-3xl font-bold text-white mb-6 tracking-wider
+            {/* Contact Information Section */}
+            <div className="space-y-8">
+              <div className="backdrop-blur-md bg-white/5 border border-white/20 rounded-xl p-8 shadow-2xl">
+                <h2 className="text-3xl font-bold text-white mb-6 tracking-wider
                 [text-shadow:_0_1px_0_rgb(255_255_255_/_40%)]">
-                Contact Information
-              </h2>
+                  Contact Information
+                </h2>
 
-              <div className="space-y-6">
-                <div className="flex items-center space-x-4 text-white/80 group">
-                  <FaMapMarkerAlt className="text-2xl text-blue-400 group-hover:text-blue-300 transition-colors" />
-                  <div>
-                    <h3 className="font-semibold text-xl mb-1">Location</h3>
-                    <p>Basel, Switzerland</p>
+                <div className="space-y-6">
+                  <div className="flex items-center space-x-4 text-white/80 group">
+                    <FaMapMarkerAlt className="text-2xl text-blue-400 group-hover:text-blue-300 transition-colors" />
+                    <div>
+                      <h3 className="font-semibold text-xl mb-1">Location</h3>
+                      <p>Basel, Switzerland</p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="flex items-center space-x-4 text-white/80 group">
-                  <FaEnvelope className="text-2xl text-blue-400 group-hover:text-blue-300 transition-colors" />
-                  <div>
-                    <h3 className="font-semibold text-xl mb-1">Email</h3>
-                    <a href="mailto:fabian.boni@bonimakeit.ch"
-                      className="hover:text-blue-400 transition-colors">
-                      fabian.boni@bonimakeit.ch
-                    </a>
+                  <div className="flex items-center space-x-4 text-white/80 group">
+                    <FaEnvelope className="text-2xl text-blue-400 group-hover:text-blue-300 transition-colors" />
+                    <div>
+                      <h3 className="font-semibold text-xl mb-1">Email</h3>
+                      <a href="mailto:fabian.boni@bonimakeit.ch"
+                        className="hover:text-blue-400 transition-colors">
+                        fabian.boni@bonimakeit.ch
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="backdrop-blur-md bg-white/5 border border-white/20 rounded-xl p-8 shadow-2xl">
-              <h2 className="text-3xl font-bold text-white mb-6 tracking-wider
+              <div className="backdrop-blur-md bg-white/5 border border-white/20 rounded-xl p-8 shadow-2xl">
+                <h2 className="text-3xl font-bold text-white mb-6 tracking-wider
                 [text-shadow:_0_1px_0_rgb(255_255_255_/_40%)]">
-                Social Links
-              </h2>
+                  Social Links
+                </h2>
 
-              <div className="flex space-x-6">
-                <a href="https://github.com/FabianBoni"
-                  className="text-3xl text-white/80 hover:text-blue-400 transition-all duration-300 transform hover:scale-110">
-                  <FaGithub />
-                </a>
-                <a href="https://ch.linkedin.com/in/fabian-boni-82a5ba192"
-                  className="text-3xl text-white/80 hover:text-blue-400 transition-all duration-300 transform hover:scale-110">
-                  <FaLinkedin />
-                </a>
+                <div className="flex space-x-6">
+                  <a href="https://github.com/FabianBoni"
+                    className="text-3xl text-white/80 hover:text-blue-400 transition-all duration-300 transform hover:scale-110">
+                    <FaGithub />
+                  </a>
+                  <a href="https://ch.linkedin.com/in/fabian-boni-82a5ba192"
+                    className="text-3xl text-white/80 hover:text-blue-400 transition-all duration-300 transform hover:scale-110">
+                    <FaLinkedin />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <Footer />
-      <MobileMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
-    </main>
+        <Footer />
+        <MobileMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
+      </main>
+    </>
   );
 }

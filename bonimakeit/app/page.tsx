@@ -28,16 +28,6 @@ const Scene3D = dynamic(() => import("./components/Scene3D"), {
   </div>
 })
 
-// Add preloading hints in the head
-const preloadModels = () => {
-  return (
-    <head>
-      <link rel="preload" as="fetch" href="/models/r2d2.glb" crossOrigin="anonymous" />
-      <link rel="preload" as="fetch" href="/models/star-destroyer.glb" crossOrigin="anonymous" />
-    </head>
-  )
-}
-
 const SideNav = ({ currentSection, setCurrentSection }: { currentSection: number, setCurrentSection: (section: number) => void }) => {
   const sections = [
     { id: 1, name: "Welcome", icon: "🌟" },
@@ -168,26 +158,34 @@ export default function Home() {
   }, [currentSection])
 
   useEffect(() => {
-    const numberOfStars = isMobile ? 100 : 200
-    const container = document.getElementById('stars')
-    if (!container) return
+    const numberOfStars: number = 200;
+    const container: HTMLElement | null = document.getElementById('stars');
+    const stars: HTMLDivElement[] = [];
 
-    const stars = createStars(container, numberOfStars)
-    const animationInterval = setInterval(() => {
-      requestAnimationFrame(() => {
-        stars.forEach(star => {
-          if (Math.random() < 0.05) {
-            star.style.opacity = star.style.opacity === '0' ? '1' : '0'
+    if (container) {
+      for (let i = 0; i < numberOfStars; i++) {
+        const star: HTMLDivElement = document.createElement('div');
+        star.className = 'star';
+        star.style.top = `${Math.random() * 100}vh`;
+        star.style.left = `${Math.random() * 100}vw`;
+        container.appendChild(star);
+        stars.push(star);
+      }
+
+      const animateStars = (): void => {
+        stars.forEach((star: HTMLDivElement) => {
+          if (Math.random() < 0.1) {
+            const targetOpacity: string = star.style.opacity === '0' ? '1' : '0';
+            star.style.opacity = targetOpacity;
+            star.style.transition = `opacity ${Math.random() * 2 + 0.5}s`;
           }
-        })
-      })
-    }, 200)
+        });
+      };
 
-    return () => {
-      clearInterval(animationInterval)
-      container.innerHTML = ''
+      const intervalId: NodeJS.Timeout = setInterval(animateStars, 100);
+      return () => clearInterval(intervalId);
     }
-  }, [isMobile])
+  }, []);
 
   return (
     <>
@@ -204,7 +202,7 @@ export default function Home() {
       <Suspense fallback={<div className="h-screen w-full flex items-center justify-center">Loading...</div>}>
         <main className="relative h-screen overflow-hidden">
           <SideNav currentSection={currentSection} setCurrentSection={setCurrentSection} />
-          <div className="stars" id="stars"></div>
+          <div className="stars absolute h-full w-full z-10" id="stars"></div>
           <div className="w-full relative z-10">
             {/* Section 1 - Welcome */}
             <section id="section1" className="scene-transition w-full mt-[100px] h-screen mx-auto flex items-center justify-center">
@@ -264,19 +262,4 @@ function throttle(func: Function, limit: number) {
       setTimeout(() => inThrottle = false, limit)
     }
   }
-}
-
-function createStars(container: HTMLElement, numberOfStars: number) {
-  const fragment = document.createDocumentFragment()
-  const stars: HTMLDivElement[] = []
-  for (let i = 0; i < numberOfStars; i++) {
-    const star = document.createElement('div')
-    star.className = 'star'
-    star.style.top = `${Math.random() * 100}vh`
-    star.style.left = `${Math.random() * 100}vw`
-    fragment.appendChild(star)
-    stars.push(star)
-  }
-  container.appendChild(fragment)
-  return stars
 }
