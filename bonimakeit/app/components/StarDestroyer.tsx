@@ -54,7 +54,7 @@ const StarDestroyer = () => {
   }, [])
 
   return (
-    <div className="w-full inset-0 flex flex-col items-center justify-center h-screen">
+    <div className="w-full absolute inset-0 flex flex-col items-center justify-center h-screen">
       <Canvas
         camera={{ position: isMobile ? [0, 3, 8] : [0, 5, 15], fov: isMobile ? 75 : 45 }}
         style={{ background: 'transparent' }}
