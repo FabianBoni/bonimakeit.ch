@@ -1,97 +1,33 @@
 "use client"
 
-import { useEffect, useState } from 'react'
 import client from '../../../tina/__generated__/client'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import Link from 'next/link'
 import Image from 'next/image'
 import MobileMenu from '@/app/components/MobileMenu'
+import { useState } from 'react'
+import StarryBackground from './StarryBackground'
 
-interface Post {
-  __typename: "Post";
-  id: string;
-  title: string;
-  body?: any;
-  heroImage?: string;
-  excerpt?: string;
-  date?: string;
-  _sys: {
-    __typename?: "SystemInfo";
-    filename: string;
-    basename: string;
-    hasReferences?: boolean | null;
-    breadcrumbs: string[];
-    path: string;
-    relativePath: string;
-    extension: string;
-  };
-}
-
-export default function Blog() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const postsData = await client.queries.postConnection();
-      if (postsData.data.postConnection?.edges) {
-        const validPosts = postsData.data.postConnection.edges
-          .map(edge => edge?.node)
-          .filter((node): node is Post =>
-            node !== null &&
-            node !== undefined &&
-            node.__typename === "Post"
-          );
-        setPosts(validPosts);
-      }
-    };
-
-    fetchPosts();
-  }, []);
-
-  useEffect(() => {
-    const numberOfStars: number = 200;
-    const container: HTMLElement | null = document.getElementById('stars');
-    const stars: HTMLDivElement[] = [];
-
-    if (container) {
-      for (let i = 0; i < numberOfStars; i++) {
-        const star: HTMLDivElement = document.createElement('div');
-        star.className = 'star';
-        star.style.top = `${Math.random() * 100}vh`;
-        star.style.left = `${Math.random() * 100}vw`;
-        container.appendChild(star);
-        stars.push(star);
-      }
-
-      const animateStars = (): void => {
-        stars.forEach((star: HTMLDivElement) => {
-          if (Math.random() < 0.1) {
-            const targetOpacity: string = star.style.opacity === '0' ? '1' : '0';
-            star.style.opacity = targetOpacity;
-            star.style.transition = `opacity ${Math.random() * 2 + 0.5}s`;
-          }
-        });
-      };
-
-      const intervalId: NodeJS.Timeout = setInterval(animateStars, 100);
-      return () => clearInterval(intervalId);
-    }
-  }, []);
+export default async function Blog() {
+  // Fetch and validate posts data
+  const postsData = await client.queries.postConnection();
+  const posts = postsData.data.postConnection?.edges
+    ?.map(edge => edge?.node)
+    .filter((node) =>
+      node !== null &&
+      node !== undefined &&
+      node.__typename === "Post" &&
+      node._sys?.filename
+    ) ?? [];
 
   return (
-    <main className="min-h-screen relative bg-black overflow-auto">
+    <main className="min-h-screen relative bg-black">
       <div className="flex items-center fixed top-0 left-0 h-[50px] w-full z-50 md:backdrop-blur-none backdrop-blur-md">
-        <button
-          onClick={() => setIsMenuOpen(true)}
-          className="md:hidden text-white text-2xl absolute right-4"
-        >
-          ☰
-        </button>
+        <MobileMenuButton />
       </div>
       <Header />
-      <div className="stars h-full w-full absolute z-10" id="stars"></div>
+      <StarryBackground />
 
       <div className="pt-12 md:pt-48 pb-20 px-4 max-w-7xl mx-auto relative z-10">
         <h1 className="text-6xl font-bold text-white mb-12 text-center tracking-wider
@@ -100,7 +36,7 @@ export default function Blog() {
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post) => (
+          {posts.map((post) => post && (
             <Link href={`/pages/blog/${post._sys.filename}`} key={post._sys.filename}>
               <article className="group backdrop-blur-md bg-white/5 border border-white/20 rounded-xl overflow-hidden 
                 transition-all duration-300 hover:transform hover:scale-105 hover:bg-white/10">
@@ -134,7 +70,23 @@ export default function Blog() {
         </div>
       </div>
       <Footer />
-      <MobileMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
+      <MobileMenu isOpen={false} setIsOpen={() => {}} />
     </main>
   )
+}
+
+function MobileMenuButton() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  return (
+    <>
+      <button
+        onClick={() => setIsMenuOpen(true)}
+        className="md:hidden text-white text-2xl absolute right-4"
+      >
+        ☰
+      </button>
+      <MobileMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} />
+    </>
+  );
 }
