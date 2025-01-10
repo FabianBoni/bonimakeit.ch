@@ -7,7 +7,7 @@ export default function CreditsContent() {
           CREDITS
         </h1>
       </div>
-      <div className="absolute w-[85%] md:w-auto flex flex-col items-center gap-8 !top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 p-4 md:p-8 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 shadow-lg max-h-[60vh] overflow-y-auto">
+      <div className="absolute w-[85%] my-8 md:my-[unset] md:w-auto flex flex-col items-center gap-8 !top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 p-4 md:p-8 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 shadow-lg max-h-[60vh] overflow-y-auto">
         <div className="space-y-4 text-white/80">
           <h2 className="text-xl md:text-2xl font-bold text-center md:text-left">3D Models</h2>
           <ul className="list-disc pl-5 space-y-2 text-sm md:text-base">
