@@ -8,9 +8,10 @@ import Footer from './components/Footer'
 import MobileMenu from "./components/MobileMenu"
 import AboutContent from './components/AboutContent'
 import CreditsContent from './components/CreditsContent'
+import ProjectMobileView from './components/ProjectMobileView';
 
 // Lazy load 3D components
-const R2 = dynamic(() => import("./components/R2"), { 
+const R2 = dynamic(() => import("./components/R2"), {
   loading: () => <div className="w-full h-full flex items-center justify-center">
     <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
   </div>,
@@ -206,7 +207,12 @@ export default function Home() {
           <div className="w-full relative z-10">
             {/* Section 1 - Welcome */}
             <section id="section1" className="scene-transition w-full mt-[100px] h-screen mx-auto flex items-center justify-center">
-              <div className="!absolute top-1/2 translate-y-[-35%] scene">
+            <div className="absolute w-full text-center md:w-[unset] md:mx-12 top-48 md:top-64 left-1/2 transform -translate-x-1/2 z-10">
+                <h1 className="text-4xl md:text-6xl font-bold text-white tracking-wider [text-shadow:_0_1px_0_rgb(255_255_255_/_40%),_0_2px_0_rgb(255_255_255_/_30%),_0_3px_0_rgb(255_255_255_/_20%),_0_4px_0_rgb(255_255_255_/_10%),_0_5px_0_rgb(255_255_255_/_5%)]">
+                  WELCOME ON MY PORTFOLIO
+                </h1>
+              </div>
+              <div className="!absolute top-1/2 translate-y-[-50%] md:translate-y-[-35%] scene">
                 <R2 />
               </div>
               <div className="scene-mask"></div>
@@ -215,11 +221,11 @@ export default function Home() {
             {/* Section 2 - About Me */}
             <section id="section2" className="scene-transition w-full h-screen flex items-center flex-row justify-between bg-[url('/images/tatooinebig.jpg')] bg-cover bg-center bg-no-repeat">
               <div className="absolute w-full text-center md:w-[unset] md:mx-12 top-24 md:top-48 left-1/2 transform -translate-x-1/2 z-10">
-                <h1 className="text-4xl md:text-4xl font-bold text-white tracking-wider [text-shadow:_0_1px_0_rgb(255_255_255_/_40%),_0_2px_0_rgb(255_255_255_/_30%),_0_3px_0_rgb(255_255_255_/_20%),_0_4px_0_rgb(255_255_255_/_10%),_0_5px_0_rgb(255_255_255_/_5%)]">
+                <h1 className="text-4xl md:text-6xl font-bold text-white tracking-wider [text-shadow:_0_1px_0_rgb(255_255_255_/_40%),_0_2px_0_rgb(255_255_255_/_30%),_0_3px_0_rgb(255_255_255_/_20%),_0_4px_0_rgb(255_255_255_/_10%),_0_5px_0_rgb(255_255_255_/_5%)]">
                   ABOUT ME
                 </h1>
               </div>
-              <div className="scene">
+              <div className="scene top-12">
                 <StarDestroyer />
                 <AboutContent />
               </div>
@@ -227,15 +233,19 @@ export default function Home() {
             </section>
 
             {/* Section 3 - Projects */}
-            <section id="section3" className="scene-transition w-full h-screen flex items-center flex-row justify-between bg-[url('/images/space.jpg')] bg-cover bg-top bg-no-repeat">
-              <div className="absolute w-full h-full bg-black opacity-35" />
-              <div className="absolute md:w-[unset] md:mx-12 top-24 md:top-48 left-1/2 transform -translate-x-1/2 z-10">
-                <h1 className="text-4xl md:text-6xl font-bold text-white tracking-wider [text-shadow:_0_1px_0_rgb(255_255_255_/_40%),_0_2px_0_rgb(255_255_255_/_30%),_0_3px_0_rgb(255_255_255_/_20%),_0_4px_0_rgb(255_255_255_/_10%),_0_5px_0_rgb(255_255_255_/_5%)]">
+            <section id="section3" className="scene-transition w-full h-screen pt-24 md:pt-48 flex flex-col items-center justify-between bg-[url('/images/space.jpg')] bg-cover bg-top bg-no-repeat">
+                {isMobile && currentSection == 3 && (
+                        <div className="fixed top-0 w-full h-full bg-black opacity-50" />
+                )}
+                <h1 className="w-full relative z-10 text-4xl text-center md:text-6xl font-bold text-white tracking-wider [text-shadow:_0_1px_0_rgb(255_255_255_/_40%),_0_2px_0_rgb(255_255_255_/_30%),_0_3px_0_rgb(255_255_255_/_20%),_0_4px_0_rgb(255_255_255_/_10%),_0_5px_0_rgb(255_255_255_/_5%)]">
                   PROJECTS
                 </h1>
-              </div>
               <div className="scene">
-                <Scene3D isMobile={isMobile} />
+                {isMobile ? (
+                  <ProjectMobileView />
+                ) : (
+                  <Scene3D isMobile={isMobile} />
+                )}
               </div>
               <div className="scene-mask"></div>
             </section>
@@ -250,8 +260,7 @@ export default function Home() {
         </main>
       </Suspense>
     </>
-  )
-}
+  )}
 
 function throttle(func: Function, limit: number) {
   let inThrottle: boolean

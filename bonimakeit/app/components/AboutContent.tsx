@@ -1,6 +1,6 @@
 export default function AboutContent() {
   return (
-    <div className="absolute w-[85%] h-[50%] md:h-[50%] md:w-[unset] md:mt-24 flex flex-col md:flex-row items-center gap-6 md:gap-12 !top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 p-4 md:p-8 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 shadow-lg max-h-[80vh] overflow-y-auto">
+    <div className="absolute w-[85%] md:w-[unset] md:mt-24 flex flex-col md:flex-row items-center gap-6 md:gap-12 !top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 p-4 md:p-8 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 shadow-lg max-h-[80vh] overflow-y-auto">
       <div className="w-32 md:w-auto">
         <img
           src="/images/fabian-boni.png"
@@ -33,7 +33,7 @@ export default function AboutContent() {
         </div>
         <div className="flex justify-center md:justify-start mt-6">
           <a
-            href="/cv/fabian-boni-cv.pdf"
+            href="/docs/lebenslauf-fabian-boni.pdf"
             download
             className="px-6 py-3 rounded-lg backdrop-blur-md bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all duration-300 flex items-center gap-2"
           >
