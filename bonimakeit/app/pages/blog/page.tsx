@@ -54,7 +54,7 @@ export default function Blog() {
     return (
       <button
         onClick={() => setIsMenuOpen(true)}
-        className="md:hidden text-white text-2xl z-50 absolute right-4"
+        className="md:hidden text-white text-2xl absolute right-4"
       >
         ☰
       </button>
