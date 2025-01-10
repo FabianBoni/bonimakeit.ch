@@ -30,7 +30,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, setIsOpen }) => {
 
   return (
     <div
-      className={`fixed inset-0 bg-black/90 backdrop-blur-md z-50 transition-transform duration-300 ${
+      className={`fixed h-full inset-0 bg-black/90 backdrop-blur-md z-50 transition-transform duration-300 ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}
     >
