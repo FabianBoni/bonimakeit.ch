@@ -4,6 +4,7 @@ import { useGLTF, OrbitControls, Environment, Html } from '@react-three/drei'
 import { useEffect, useState } from 'react'
 
 function Model() {
+  useGLTF.preload("/r2d2/scene.gltf")
   const { scene } = useGLTF("/r2d2/scene.gltf", true)
   const [isMobile, setIsMobile] = useState(false)
   const [message, setMessage] = useState('')
@@ -47,7 +48,7 @@ function Model() {
     <group>
       <primitive 
         object={scene} 
-        scale={isMobile ? 1.5 : 2.5} 
+        scale={isMobile ? 1.5 : 3.5} 
       />
       <Html
         position={[isMobile ? 2 : 4, isMobile ? 1 : 2, 0]}
@@ -78,7 +79,7 @@ const R2 = () => {
   }, [])
 
   return (
-    <div className="-mt-[100px] w-full h-screen inset-0 flex items-center justify-center">
+    <div className="mt-[100px] w-full h-screen inset-0 flex items-center justify-center">
       <Canvas
         camera={{ 
           position: isMobile ? [5, 5, 5] : [10, 10, 10], 

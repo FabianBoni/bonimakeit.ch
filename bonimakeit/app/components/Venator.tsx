@@ -8,7 +8,7 @@ import PulsingCircle from './PulsingCircle'
 import { useRouter } from 'next/navigation'
 
 export function Venator() {
-  const { scene } = useGLTF("/venator/scene.gltf", true)
+  const { scene } = useGLTF("/interdictor2/scene.gltf", true)
   const modelRef = useRef<THREE.Group>(null!)
   const [position, setPosition] = useState<[number, number, number]>([0, 0, 0])
   const [isMobile, setIsMobile] = useState(false)
@@ -51,7 +51,7 @@ export function Venator() {
       <primitive
         ref={modelRef}
         object={scene}
-        scale={isMobile ? 0.1 : 0.2}
+        scale={isMobile ? 0.03 : 0.08}
         // In Venator.tsx, update the primitive position
         position={[isMobile ? 2.5 : 8, 0, 0]}
       />

@@ -5,15 +5,14 @@ import Header from '../../../components/Header'
 import Footer from '../../../components/Footer'
 import Link from 'next/link'
 
-async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ filename: string | undefined }[]> {
   const postsListData = await client.queries.postConnection()
-
   return postsListData.data.postConnection.edges?.map((post) => ({
     filename: post?.node?._sys.filename,
   })) ?? []
 }
 
-async function BlogPost({ params }: { params: { filename: string } }) {
+export default async function BlogPost({ params }: { params: { filename: string } }) {
   const { data } = await client.queries.post({
     relativePath: `${params.filename}.md`,
   })
@@ -61,6 +60,3 @@ async function BlogPost({ params }: { params: { filename: string } }) {
     </>
   )
 }
-
-export { generateStaticParams }
-export default BlogPost
