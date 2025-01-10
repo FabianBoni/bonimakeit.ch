@@ -10,7 +10,10 @@ import AboutContent from './components/AboutContent'
 import CreditsContent from './components/CreditsContent'
 
 // Lazy load 3D components
-const R2 = dynamic(() => import("./components/R2"), {
+const R2 = dynamic(() => import("./components/R2"), { 
+  loading: () => <div className="w-full h-full flex items-center justify-center">
+    <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
+  </div>,
   ssr: false
 })
 
@@ -19,8 +22,21 @@ const StarDestroyer = dynamic(() => import("./components/StarDestroyer"), {
 })
 
 const Scene3D = dynamic(() => import("./components/Scene3D"), {
-  ssr: false
+  ssr: false,
+  loading: () => <div className="w-full h-full flex items-center justify-center">
+    <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
+  </div>
 })
+
+// Add preloading hints in the head
+const preloadModels = () => {
+  return (
+    <head>
+      <link rel="preload" as="fetch" href="/models/r2d2.glb" crossOrigin="anonymous" />
+      <link rel="preload" as="fetch" href="/models/star-destroyer.glb" crossOrigin="anonymous" />
+    </head>
+  )
+}
 
 const SideNav = ({ currentSection, setCurrentSection }: { currentSection: number, setCurrentSection: (section: number) => void }) => {
   const sections = [
