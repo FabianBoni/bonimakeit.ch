@@ -192,7 +192,7 @@ export default function Home() {
           <div className="w-full relative z-10">
             {/* Section 1 - Welcome */}
             <section id="section1" className="!overflow-y-auto cene-transition pt-24 md:pt-48 w-full h-screen mx-auto flex flex-col items-center justify-center">
-              <h1 className="w-full text-4xl text-center md:text-6xl font-bold text-white tracking-wider [text-shadow:_0_1px_0_rgb(255_255_255_/_40%),_0_2px_0_rgb(255_255_255_/_30%),_0_3px_0_rgb(255_255_255_/_20%),_0_4px_0_rgb(255_255_255_/_10%),_0_5px_0_rgb(255_255_255_/_5%)]">
+              <h1 className="w-full mt-[48px] text-4xl text-center md:text-6xl font-bold text-white tracking-wider [text-shadow:_0_1px_0_rgb(255_255_255_/_40%),_0_2px_0_rgb(255_255_255_/_30%),_0_3px_0_rgb(255_255_255_/_20%),_0_4px_0_rgb(255_255_255_/_10%),_0_5px_0_rgb(255_255_255_/_5%)]">
                 WELCOME ON MY PORTFOLIO
               </h1>
               <div className="scene">

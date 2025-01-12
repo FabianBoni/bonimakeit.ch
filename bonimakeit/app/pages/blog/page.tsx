@@ -29,8 +29,7 @@ export default function Blog() {
       const posts = await response.json();
       setPosts(posts);
     };
-    console.log('Fetching posts...');
-    console.log(posts);
+
     fetchPosts();
   }, []);
 
@@ -62,7 +61,7 @@ export default function Blog() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {posts.map((post) => (
-              <Link href={`/pages/blog/${post._sys.filename}`} key={post._sys.filename}>
+              <Link href={`${post._sys.filename}`} key={post._sys.filename}>
                 <article className="group backdrop-blur-md bg-white/5 border border-white/20 rounded-xl overflow-hidden 
                 transition-all duration-300 hover:transform hover:scale-105 hover:bg-white/10">
                   {post.heroImage && (
