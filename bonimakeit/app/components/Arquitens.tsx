@@ -8,7 +8,8 @@ import PulsingCircle from './PulsingCircle'
 import { useRouter } from 'next/navigation'
 
 export function Arquitens() {
-  const { scene } = useGLTF("/interdictor3/scene.gltf", true)
+  useGLTF.preload("/star_destroyer_3/scene.gltf");
+  const { scene } = useGLTF("/star_destroyer_3/scene.gltf", true)
   const modelRef = useRef<THREE.Group>(null!)
   const [position, setPosition] = useState<[number, number, number]>([0, 0, 0])
   const [isMobile, setIsMobile] = useState(false)
@@ -51,7 +52,7 @@ export function Arquitens() {
       <primitive
         ref={modelRef}
         object={scene}
-        scale={isMobile ? 0.05 : 0.09}
+        scale={isMobile ? 0.005 : 0.01}
         // In Arquitens.tsx, update the primitive position
         position={[isMobile ? 0 : -5, 0, 0]}
       />

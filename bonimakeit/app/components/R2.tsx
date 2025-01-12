@@ -79,7 +79,7 @@ const R2 = () => {
   }, [])
 
   return (
-    <div className="mt-[100px] w-full h-screen inset-0 flex items-center justify-center">
+    <div className="w-full h-screen inset-0 flex items-center justify-center">
       <Canvas
         camera={{ 
           position: isMobile ? [5, 5, 5] : [10, 10, 10], 

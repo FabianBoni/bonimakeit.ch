@@ -1,7 +1,7 @@
 export default function AboutContent() {
   return (
-    <div id="about-content" className="w-[85%] h-[65%] md:w-[50%] md:h-[unset] md:mt-24 flex flex-col md:flex-row items-center gap-6 md:gap-12 p-4 md:p-8 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 shadow-lg max-h-[80vh] overflow-y-auto">
-      <div className="w-32 md:w-auto">
+    <div id="about-content" className="w-[85%] md:w-[65%] flex flex-col md:flex-row items-center gap-6 md:gap-12 p-4 md:p-8 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 shadow-lg">
+      <div className="w-32 md:w-auto pt-5 pb-5">
         <img
           src="/images/fabian-boni.png"
           alt="Fabian Boni"
@@ -10,7 +10,7 @@ export default function AboutContent() {
           className="rounded-full border-4 border-white/20"
         />
       </div>
-      <div className="w-full md:w-auto">
+      <div className="w-full md:w-auto pt-5 pb-5">
         <div className="space-y-4 text-white/80 text-sm md:text-base px-2 md:px-0">
           <p className="leading-relaxed">
             Hi, my name is Fabian Boni, and I'm a developer and aspiring data scientist based in Basel, Switzerland.

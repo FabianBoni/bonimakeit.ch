@@ -35,7 +35,7 @@ function Model() {
     <primitive 
       ref={modelRef} 
       object={scene} 
-      scale={isMobile ? 0.0025 : 0.005} 
+      scale={isMobile ? 0.005 : 0.01} 
       position={[0, 0, 0]} 
     />
   )

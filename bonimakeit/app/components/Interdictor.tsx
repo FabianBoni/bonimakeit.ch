@@ -13,8 +13,8 @@ interface InterdictorProps {
 }
 
 export function Interdictor({ position = [0, 0, 0], rotation = [0, 0, 0] }: InterdictorProps) {
-  useGLTF.preload("/interdictor/scene.gltf");
-  const { scene } = useGLTF("/interdictor/scene.gltf", true)
+  useGLTF.preload("/star_destroyer_1/scene.gltf");
+  const { scene } = useGLTF("/star_destroyer_1/scene.gltf", true)
   const modelRef = useRef<THREE.Group>(null!)
   const [modelPosition, setModelPosition] = useState<[number, number, number]>(position)
   const [isMobile, setIsMobile] = useState(false)
@@ -57,7 +57,7 @@ export function Interdictor({ position = [0, 0, 0], rotation = [0, 0, 0] }: Inte
       <primitive
         ref={modelRef}
         object={scene}
-        scale={0.5}
+        scale={0.01}
         position={position}
         rotation={rotation}
       />

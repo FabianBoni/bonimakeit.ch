@@ -2,27 +2,27 @@
 const MobileProjectsView = () => {
     return (
         <>
-            <div className="absolute top-0 w-full h-full bg-black opacity-50" />
-            <div className="w-full h-[85%] overflow-y-auto px-6 flex flex-col items-center justify-center">
-                <div className="space-y-6 w-full max-w-md pt-64 pb-12">
+            <div className="fixed top-0 w-full h-full bg-black opacity-50" />
+            <div className="w-full px-6 flex flex-col items-center justify-center">
+                <div className="space-y-6 w-full max-w-md pt-12 pb-24">
                     {[
                         {
                             title: "Stepperly",
                             description: "AI powered step by step introductions.",
                             tech: "React, TypeScript, Three.js, API, AI",
-                            link: "/pages/projects/stepperly"
+                            link: "/projects/stepperly"
                         },
                         {
                             title: "Immolink",
                             description: "Real estate client side management app.",
                             tech: "Flutter, Dart, React",
-                            link: "/pages/projects/immolink"
+                            link: "/projects/immolink"
                         },
                         {
                             title: "Autotrade",
                             description: "AI powered crypto trading script.",
                             tech: "Python, AI, Data Science",
-                            link: "/pages/projectsautotrade"
+                            link: "/projects/autotrade"
                         }
                         // Add more projects as needed
                     ].map((project, index) => (

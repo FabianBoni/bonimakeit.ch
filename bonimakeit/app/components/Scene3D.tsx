@@ -29,7 +29,7 @@ export default function Scene3D({ isMobile }: { isMobile: boolean }) {
         castShadow
         color="#ffa07a"
       />
-      <group scale={isMobile ? 0.9 : 1}>
+      <group scale={isMobile ? 0.9 : 1.25}>
         <DeathStar />
         <Venator />
         <Interdictor />

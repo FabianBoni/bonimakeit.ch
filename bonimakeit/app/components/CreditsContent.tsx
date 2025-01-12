@@ -1,13 +1,13 @@
 export default function CreditsContent() {
   return (
     <>
-      <div className="absolute w-full h-full bg-black opacity-50" />
-      <div className="absolute md:w-[unset] md:mx-12 top-24 md:top-48 left-1/2 transform -translate-x-1/2 z-10">
+      <div className="absolute w-full h-full top-0 bg-black opacity-50" />
+      <div className="relative z-10">
         <h1 className="text-4xl md:text-6xl font-bold text-white tracking-wider [text-shadow:_0_1px_0_rgb(255_255_255_/_40%),_0_2px_0_rgb(255_255_255_/_30%),_0_3px_0_rgb(255_255_255_/_20%),_0_4px_0_rgb(255_255_255_/_10%),_0_5px_0_rgb(255_255_255_/_5%)]">
           CREDITS
         </h1>
       </div>
-      <div className="absolute w-[85%] my-8 md:my-[unset] md:w-auto flex flex-col items-center gap-8 !top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 p-4 md:p-8 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 shadow-lg max-h-[60vh] overflow-y-auto">
+      <div className="relative w-[85%] my-8 md:my-[unset] md:w-auto flex flex-col items-center gap-8 p-4 md:p-8 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 shadow-lg max-h-[60vh] overflow-y-auto">
         <div className="space-y-4 text-white/80">
           <h2 className="text-xl md:text-2xl font-bold text-center md:text-left">3D Models</h2>
           <ul className="list-disc pl-5 space-y-2 text-sm md:text-base">
