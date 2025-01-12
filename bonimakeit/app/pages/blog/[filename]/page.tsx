@@ -1,21 +1,26 @@
 import Image from 'next/image'
-import { TinaMarkdown } from 'tinacms/dist/rich-text'
-import client from '../../../../tina/__generated__/client'
 import Header from '../../../components/Header'
 import Footer from '../../../components/Footer'
 import Link from 'next/link'
+import { promises as fs } from 'fs'
+import path from 'path'
+import ReactMarkdown from 'react-markdown'
 
-export async function generateStaticParams(): Promise<{ filename: string | undefined }[]> {
-  const postsListData = await client.queries.postConnection()
-  return postsListData.data.postConnection.edges?.map((post) => ({
-    filename: post?.node?._sys.filename,
-  })) ?? []
+export async function generateStaticParams() {
+  const postsPath = path.join(process.cwd(), 'posts', 'posts.json')
+  const fileContents = await fs.readFile(postsPath, 'utf8')
+  const { posts } = JSON.parse(fileContents)
+  
+  return posts.map((post: any) => ({
+    filename: post._sys.filename,
+  }))
 }
 
 export default async function BlogPost({ params }: { params: { filename: string } }) {
-  const { data } = await client.queries.post({
-    relativePath: `${params.filename}.md`,
-  })
+  const postsPath = path.join(process.cwd(), 'posts', 'posts.json')
+  const fileContents = await fs.readFile(postsPath, 'utf8')
+  const { posts } = JSON.parse(fileContents)
+  const post = posts.find((p: any) => p._sys.filename === params.filename)
 
   return (
     <>
@@ -30,11 +35,11 @@ export default async function BlogPost({ params }: { params: { filename: string 
           >
             ← Return to Blog
           </Link>
-          {data.post.heroImage && (
+          {post.heroImage && (
             <div className="relative h-48 sm:h-64 md:h-96 w-full mb-4 md:mb-8 rounded-xl overflow-hidden">
               <Image
-                src={data.post.heroImage}
-                alt={data.post.title}
+                src={post.heroImage}
+                alt={post.title}
                 fill
                 className="object-cover"
                 priority
@@ -42,16 +47,16 @@ export default async function BlogPost({ params }: { params: { filename: string 
             </div>
           )}
           <div className="backdrop-blur-md bg-white/5 border border-white/20 rounded-xl p-4 md:p-8">
-            {data.post.date && (
+            {post.date && (
               <time className="text-gray-400 mb-2 md:mb-4 block text-sm md:text-base">
-                {new Date(data.post.date).toLocaleDateString()}
+                {new Date(post.date).toLocaleDateString()}
               </time>
             )}
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-8 [text-shadow:_0_1px_0_rgb(255_255_255_/_40%)]">
-              {data.post.title}
+              {post.title}
             </h1>
             <div className="prose prose-invert prose-sm md:prose-lg max-w-none text-white">
-              <TinaMarkdown content={data.post.body} />
+              <ReactMarkdown>{post.body}</ReactMarkdown>
             </div>
           </div>
         </article>

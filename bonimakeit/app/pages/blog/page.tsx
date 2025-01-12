@@ -1,6 +1,5 @@
 "use client"
 
-import client from '../../../tina/__generated__/client'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import Link from 'next/link'
@@ -10,23 +9,14 @@ import { useState, useEffect } from 'react'
 import StarryBackground from './StarryBackground'
 
 interface Post {
-  __typename: "Post"
-  id: string
-  title: string
-  heroImage?: string | null
-  date?: string | null
-  excerpt?: string | null
-  body?: any
+  title: string;
+  heroImage?: string | null;
+  date?: string | null;
+  excerpt?: string | null;
+  body?: string;
   _sys: {
-    __typename?: "SystemInfo"
-    filename: string
-    basename: string
-    hasReferences?: boolean | null
-    breadcrumbs: string[]
-    path: string
-    relativePath: string
-    extension: string
-  }
+    filename: string;
+  };
 }
 
 export default function Blog() {
@@ -35,18 +25,12 @@ export default function Blog() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const postsData = await client.queries.postConnection();
-      const fetchedPosts = postsData.data.postConnection?.edges
-        ?.map(edge => edge?.node)
-        .filter((node): node is Post =>
-          node !== null &&
-          node !== undefined &&
-          node.__typename === "Post" &&
-          node._sys?.filename !== undefined
-        ) ?? [];
-      setPosts(fetchedPosts);
+      const response = await fetch('/api/posts');
+      const posts = await response.json();
+      setPosts(posts);
     };
-
+    console.log('Fetching posts...');
+    console.log(posts);
     fetchPosts();
   }, []);
 

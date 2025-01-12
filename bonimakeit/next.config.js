@@ -1,18 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async headers() {
-    return [
-      {
-        source: "/:path*",
-        headers: [
-          { key: "Access-Control-Allow-Origin", value: "https://content.tinajs.io" },
-          { key: "Access-Control-Allow-Methods", value: "GET,POST,OPTIONS" },
-          { key: "Access-Control-Allow-Headers", value: "*" },
-          { key: "Access-Control-Allow-Credentials", value: "true" }
-        ]
-      }
-    ]
-  }
-};
+  images: {
+    domains: ['images.unsplash.com'],
+  },
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
