@@ -2,7 +2,7 @@
 const MobileProjectsView = () => {
     return (
         <>
-            <div className="fixed top-0 w-full h-full bg-black opacity-50" />
+            <div className="absolute top-0 w-full h-full bg-black opacity-50" />
             <div className="w-full px-6 flex flex-col items-center justify-center">
                 <div className="space-y-6 w-full max-w-md pt-12 pb-24">
                     {[

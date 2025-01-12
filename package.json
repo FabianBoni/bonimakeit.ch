@@ -4,7 +4,9 @@
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.1.4",
+    "@react-email/render": "^1.0.4",
     "gray-matter": "^4.0.3",
-    "react-markdown": "^9.0.3"
+    "react-markdown": "^9.0.3",
+    "resend": "^4.0.1"
   }
 }
