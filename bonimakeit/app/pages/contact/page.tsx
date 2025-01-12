@@ -8,6 +8,8 @@ import MobileMenu from '../../components/MobileMenu';
 
 export default function Contact() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const [formData, setFormData] = useState({
     name: '',
@@ -47,7 +49,29 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Add your form submission logic here
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setSubmitStatus('idle'), 3000);
+    }
   };
 
   return (
@@ -120,12 +144,25 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  className="w-full py-4 px-6 rounded-lg bg-blue-500/80 hover:bg-blue-600/80 
+                  disabled={isSubmitting}
+                  className={`w-full py-4 px-6 rounded-lg bg-blue-500/80 hover:bg-blue-600/80 
                   text-white font-semibold transition-all duration-300 
-                  backdrop-blur-sm shadow-lg hover:shadow-blue-500/25 transform hover:scale-105"
+                  backdrop-blur-sm shadow-lg hover:shadow-blue-500/25 transform hover:scale-105
+                  ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
-                  Send Message
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
+
+                {submitStatus === 'success' && (
+                  <div className="text-green-400 text-center py-2">
+                    Message sent successfully!
+                  </div>
+                )}
+                {submitStatus === 'error' && (
+                  <div className="text-red-400 text-center py-2">
+                    Failed to send message. Please try again.
+                  </div>
+                )}
               </form>
             </div>
 
